@@ -128,6 +128,25 @@ cd regex-benchmark
 docker run --rm -v $(pwd):/var/regex mariomka/regex-benchmark:1.6
 ```
 
+# How to run with ArkTS
+
+You need to have node and php installed, and also link your bytecode of standard library and necessary binary files manually.
+
+Assume you have ArkTS repo installed in `/work/panda` directory, and build artifacts in `/work/panda/build`, then run:
+
+```sh
+PANDA_BUILD="/work/panda/build"
+ln -sf $PANDA_BUILD/plugins/ets/etsstdlib.abc arkts/stdlib/etsstdlib.abc
+ln -sf $PANDA_BUILD/bin/es2panda arkts/bin/es2panda
+ln -sf $PANDA_BUILD/bin/ark arkts/bin/ark
+```
+
+After that just run:
+
+```sh
+php run-benchmarks.php
+```
+
 # Contributing
 
 All contributions are welcome, from tiny optimizations to new implementations.
