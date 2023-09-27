@@ -6,6 +6,7 @@ const RUN_TIMES = 10;
 
 const BUILDS = [
     'ArkTS'        => 'arkts/bin/es2panda --extension=ets --opt-level=2 --output arkts/bin/benchmark.abc arkts/benchmark.ets',
+    'EcmaScript'   => 'arkts/bin/es2panda --extension=js --opt-level=2 --output ecmascript/bin/benchmark.abc ecmascript/benchmark.js'
     // 'C PCRE2'      => 'gcc -O3 -DNDEBUG c/benchmark.c -I/usr/local/include/ -lpcre2-8 -o c/bin/benchmark',
     // 'Crystal'      => 'crystal build crystal/benchmark.cr --release -o crystal/bin/benchmark',
     // 'C++ STL'      => 'g++ -std=c++11 -O3 cpp/benchmark.cpp -o cpp/bin/benchmark-stl',
@@ -26,6 +27,7 @@ const BUILDS = [
 
 const COMMANDS = [
     'ArkTS'        => 'arkts/bin/ark --boot-panda-files=arkts/stdlib/etsstdlib.abc --load-runtimes=ets arkts/bin/benchmark.abc ETSGLOBAL::main',
+    'EcmaScript'   => 'arkts/bin/ark --boot-panda-files=ecmascript/stdlib/ecmastdlib.abc --load-runtimes=ecmascript ecmascript/bin/benchmark.abc _GLOBAL::func_main_0',
     // 'C PCRE2'      => 'c/bin/benchmark',
     // 'Crystal'      => 'crystal/bin/benchmark',
     // 'C++ STL'      => 'cpp/bin/benchmark-stl',
@@ -72,7 +74,7 @@ foreach (COMMANDS as $language => $command) {
     $currentResults = [];
 
     for ($i = 0; $i < RUN_TIMES; $i++) {
-        if ($language == 'ArkTS') {
+        if ($language == 'ArkTS' || $language == 'EcmaScript') {
             $out = shell_exec($command);
         } else {
             $out = shell_exec($command . ' input-text.txt');

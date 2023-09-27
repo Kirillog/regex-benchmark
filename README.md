@@ -137,6 +137,7 @@ Assume you have ArkTS repo installed in `/work/panda` directory, and build artif
 ```sh
 PANDA_BUILD="/work/panda/build"
 ln -sf $PANDA_BUILD/plugins/ets/etsstdlib.abc arkts/stdlib/etsstdlib.abc
+ln -sf $PANDA_BUILD/plugins/ecmascript/ecmastdlib/ecmastdlib.abc ecmascript/stdlib/ecmastdlib.abc
 ln -sf $PANDA_BUILD/bin/es2panda arkts/bin/es2panda
 ln -sf $PANDA_BUILD/bin/ark arkts/bin/ark
 ```
